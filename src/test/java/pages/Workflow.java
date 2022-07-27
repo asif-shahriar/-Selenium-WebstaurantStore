@@ -45,22 +45,18 @@ public class Workflow {
 
     public void steps() throws InterruptedException {
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        // Step 1 and 2
         searchBox.sendKeys("stainless work table");
         submitSearch.click();
         Thread.sleep(2000);
-        // Step 3
         for (int i = 0; i < assertAll.size(); i++) {
             String s = assertAll.get(i).getText();
             Assert.assertTrue(s.contains("Table"));
             System.out.println("Assertion successful!");
         }
-        // Step 4
         lastPage.click();
         Thread.sleep(1500);
         lastProduct.click();
         wait.until(ExpectedConditions.elementToBeClickable(addCart)).click();
-        // Step 5
         wait.until(ExpectedConditions.elementToBeClickable(viewCart)).click();
         String t = total.getText();
         Assert.assertTrue(t.contains("264.49"));
